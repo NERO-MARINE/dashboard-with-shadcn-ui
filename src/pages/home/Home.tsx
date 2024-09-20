@@ -31,8 +31,8 @@ export default function Home() {
       const text = await response.text();
       const data = text.split("\n").map((row) => row.split(","));
 
-      // Assuming the first row is headers
-      const [headerRow, ...rows] = data;
+      // Skip the first row (headers) and ensure rows have enough columns
+      const rows = data.slice(1).filter((row) => row.length >= 4);
 
       const fetchedCardData: CardData[] = rows.map((row) => ({
         label: row[0],
